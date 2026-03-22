@@ -1,0 +1,25 @@
+# C compiled files
+*.out
+*.o
+*.obj
+*.exe
+
+# Static / shared libraries
+*.a
+*.so
+
+# Debug symbols (macOS)
+*.dSYM/
+
+# Build directories
+build/
+bin/
+
+# Neovim swap & temp files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
