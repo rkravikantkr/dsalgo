@@ -23,3 +23,6 @@ bin/
 # OS files
 .DS_Store
 Thumbs.db
+
+# macOS debug symbols
+*.dSYM/
