@@ -19,8 +19,8 @@ void pointer_to_pointer() {
     // printf("address of q: %p\n", &q);
     // printf("value stored at q: %p\n", q);
     // printf("dereferencing r: %p\n", *r);
-    assert(*r == q && "deref r contains value stored in p");
-    assert(*q == ptx && "deref q contains value stored in q");
+    assert(*r == q && "deref r contains value stored in q");
+    assert(*q == ptx && "deref q contains value stored in ptx");
     assert(*(*(*r)) == 5);
 }
 

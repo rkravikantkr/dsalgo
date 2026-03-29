@@ -29,7 +29,6 @@ void void_pointerfn() { // generic pointer type
     // no arithmetic operations
     // prints nothing
     // implicit typecasting
-    //
 
     int a = 1025;
     pvoid = &a; // explicit type casting is not required
