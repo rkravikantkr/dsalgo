@@ -64,7 +64,7 @@ int main(void) {
     int arr[] = {8, -111, 2, 19, 0, -4, 2, 5, 4, 7, 15};
     int asize = sizeof(arr) / sizeof(arr[0]);
 
-    int brr[] = {-1, 0, 8, 4, 5, 6, 3, 5, 6, -9};
+    int brr[] = {-1, 0, 8, 4, 5, 6, 3, 5, 6, 9};
     int bsize = sizeof(arr) / sizeof(arr[0]);
 
     max_min_value(arr, asize);
