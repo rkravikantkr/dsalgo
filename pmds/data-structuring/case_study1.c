@@ -1,8 +1,7 @@
-#include <stdio.h>
-/*
- * given n integers find maximum and minimum among them
+#include <stdio.h> /* given n integers find maximum and minimum among them
  */
 void max_min_value(int *A, int size);
+void max_min_value_(int *A, int size);
 void swap(int *i, int *j);
 int maxi(int arr[], int max, int index);
 int mini(int arr[], int min, int index);
@@ -65,12 +64,58 @@ int main(void) {
     int asize = sizeof(arr) / sizeof(arr[0]);
 
     int brr[] = {-1, 0, 8, 4, 5, 6, 3, 5, 6, 9};
-    int bsize = sizeof(arr) / sizeof(arr[0]);
+    int bsize = sizeof(brr) / sizeof(brr[0]);
 
+    max_min_value_(arr, asize);
     max_min_value(arr, asize);
+    printf("\n\n");
+    max_min_value_(brr, bsize);
     max_min_value(brr, bsize);
 
     // example_code();
+}
+void max_min_value_(int *A, int size) {
+    int max, min;
+
+    if (A[0] > A[1]) {
+        max = A[0];
+        min = A[1];
+
+    } else {
+        max = A[1];
+        min = A[0];
+    }
+
+    for (int i = 1; i < size / 2; ++i) {
+        if (A[2 * i] > A[2 * i + 1]) {
+            if (A[2 * i] > max)
+                max = A[2 * i];
+
+            if (A[2 * i + 1] < min)
+                min = A[2 * i + 1];
+
+        } else {
+            if (A[2 * i + 1] > max)
+                max = A[2 * i + 1];
+
+            if (A[2 * i] < min)
+                min = A[2 * i];
+        }
+    }
+
+    if (size % 2 == 0) {
+        printf("max: %d, min: %d\n", max, min);
+
+    } else { // ✅ handle odd case
+        int last = A[size - 1];
+
+        if (last > max) {
+            max = last;
+        } else if (last < min) {
+            min = last;
+        }
+        printf("max: %d, min: %d\n", max, min);
+    }
 }
 
 void max_min_value(int *A, int size) {

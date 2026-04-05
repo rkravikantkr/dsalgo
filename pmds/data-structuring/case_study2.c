@@ -20,30 +20,29 @@ int next_max(int *A, int size) {
         nmax = A[0];
     }
 
-    if (size % 2 == 0) {
-        for (int i = 1; i < size / 2; i++) {
-            int big, small;
-            if (A[2 * i] > A[2 * i + 1]) {
-                big = A[2 * i];
-                small = A[2 * i + 1];
-            } else {
-                big = A[2 * i + 1];
-                small = A[2 * i];
-            }
-            if (big > max) {
-                nmax = max;
-                max = big;
-            } else if (big > nmax) {
-                nmax = big;
-            }
-            if (small > nmax) {
-                nmax = small;
-            }
+    for (int i = 1; i < size / 2; i++) {
+        int big, small;
+        if (A[2 * i] > A[2 * i + 1]) {
+            big = A[2 * i];
+            small = A[2 * i + 1];
+        } else {
+            big = A[2 * i + 1];
+            small = A[2 * i];
         }
+        if (big > max) {
+            nmax = max;
+            max = big;
+        } else if (big > nmax) {
+            nmax = big;
+        }
+        if (small > nmax) {
+            nmax = small;
+        }
+    }
+    if (size % 2 == 0) {
         return nmax;
-
     } else {
-        // ✅ handle odd case
+        // handle odd case
         int last = A[size - 1];
 
         if (last > max) {
@@ -58,7 +57,7 @@ int next_max(int *A, int size) {
 }
 
 int main() {
-    int Arr[] = {118, 77, 25, 1, 6, 9, 4, 3};
+    int Arr[] = {1, 118, 77, 25, 1, 6, 99, 4, 3};
     int size = sizeof(Arr) / sizeof(Arr[0]);
     printf("next max: %d", next_max(Arr, size));
 }
