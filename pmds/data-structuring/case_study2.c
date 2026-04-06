@@ -6,6 +6,54 @@ given a list of numbers find next maximum ie 2nd largest value
 
 
 */
+int next_max(int *A, int size);
+void build_tournament_tree(int *A, int size);
+
+int main() {
+    int Arr[] = {1, 118, 25, 1, 6, 99, 4};
+    int size = sizeof(Arr) / sizeof(Arr[0]);
+    printf("size: %d\n", size);
+    // printf("next max: %d", next_max(Arr, size));
+    build_tournament_tree(Arr, size);
+}
+
+void print_array(int *A, int size) {
+    printf("[ ");
+    for (int i = 0; i < size - 1; i++) {
+        printf("%d, ", A[i]);
+    }
+    printf("%d ]\n", A[size - 1]);
+}
+
+int max(int a, int b) {
+    if (a > b)
+        return a;
+    return b;
+}
+
+void build_tournament_tree(int *A, int size) {
+    // tournament array
+    int t[2 * size - 1] = {};
+
+    printf("tour size: %d\n", 2 * size - 1);
+
+    // populate the tournament array
+    for (int i = 1; i <= size; i++) {
+        t[size + i - 2] = A[i - 1];
+    }
+
+    print_array(A, size);
+    printf("initial tour: ");
+    print_array(t, 2 * size - 1);
+
+    // pairwise comparisons from right end to handle odd case as well
+    for (int i = 2 * size - 2; i >= 1; i -= 2) {
+        t[i / 2 - 1] = max(t[i - 1], t[i]);
+        print_array(t, 2 * size - 1);
+    }
+
+    printf("maximum in tournament tree: %d", t[0]);
+}
 
 int next_max(int *A, int size) {
     int max, nmax;
@@ -39,12 +87,11 @@ int next_max(int *A, int size) {
             nmax = small;
         }
     }
-    if (size % 2 == 0) {
+    if (size % 2 == 0) { // even number of elements
         return nmax;
     } else {
-        // handle odd case
+        // handle odd case, last element
         int last = A[size - 1];
-
         if (last > max) {
             nmax = max;
             max = last;
@@ -52,12 +99,5 @@ int next_max(int *A, int size) {
             nmax = last;
         }
     }
-
     return nmax;
-}
-
-int main() {
-    int Arr[] = {1, 118, 77, 25, 1, 6, 99, 4, 3};
-    int size = sizeof(Arr) / sizeof(Arr[0]);
-    printf("next max: %d", next_max(Arr, size));
 }
