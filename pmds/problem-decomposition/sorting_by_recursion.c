@@ -4,12 +4,46 @@ void merge_sort(int *, int, int);
 
 void merge_arr(int *, int, int);
 
+void quick_sort(int *, int, int);
+
 int main() {
 
     // int arr[] = {1, 2, 3, 4, 5, 6};
-    int arr[] = {9, 3, 8, 7, 1, 0, -1, 320, 0, -13};
+    int arr[] = {99, 3, 8, 7, 1, -1, -320, 0, -13};
     int size = sizeof(arr) / sizeof(arr[0]);
-    merge_sort(arr, 0, size - 1);
+    // merge_sort(arr, 0, size - 1);
+    quick_sort(arr, 0, size - 1);
+    for (int l = 0; l <= size - 1; l++) {
+        printf("%d ", arr[l]);
+    }
+}
+
+int partition(int *arr, int left, int right) {
+    int i = left, j = right, pivot = arr[left];
+    int temp;
+    while (i < j) {
+        while ((i < j) && (arr[i] < pivot))
+            i++;
+        while ((i < j) && (arr[j] >= pivot))
+            j--;
+        if (i < j) {
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    if (arr[j] <= pivot)
+        return j;
+    else
+        return j - 1;
+}
+
+void quick_sort(int *arr, int i, int j) {
+    if (i >= j)
+        return;
+    int p = partition(arr, i, j);
+    quick_sort(arr, i, p);
+    quick_sort(arr, p + 1, j);
 }
 
 void merge_sort(int *arr, int i, int j) {
